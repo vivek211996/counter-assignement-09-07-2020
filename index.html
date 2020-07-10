@@ -1,0 +1,72 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>COUNTERS</title>
+    <link rel = "stylesheet" href="style.css">
+   
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        const Counter = ({value}) => <p class ="display3">{value}</p>
+
+    const Output =({}) =>{
+
+        const [counts, setcount] = React.useState([0]);
+
+        const increment = (index)=>
+            setcount((data)=>
+                data.map((count, idx) => (idx === index ? count+1 : count))
+                
+            );
+        
+        const decrement = (index)=>
+            setcount((data)=>
+                data.map((count, idx) => (idx === index ? count-1 : count))
+            );
+            const reset = (index)=>
+            setcount((data)=>
+                data.map((count, idx) => (idx === index ? count=0 : count))
+            );
+
+        const del = (index) => setcount(data => data.filter((count,idx)=> idx!= index))
+
+        const add = () => setcount((data)=>data.concat([0]))
+        
+
+        return (
+            <div className="main">
+            {
+                counts.map((count,idx)=>{
+                return (
+                   
+                        <div className="divbox">
+                            <p className="display1">Counter number</p>
+                            <p className="display2">{idx+1}</p>
+                            
+                    <Counter value={count} />
+                    
+                    <button onClick={()=>(increment(idx))} >Increment</button>
+                    <button onClick={()=>(decrement(idx))} >Decrement</button>
+                    <button onClick={()=>(reset(idx))} >Reset</button>
+                    <button onClick={()=>(del(idx))} >Delete</button>
+                    </div>
+                );                
+             })}
+             
+                <button onClick={add}>Add Counter</button>
+            </div>
+            )
+        }      
+    
+    ReactDOM.render(<Output />,document.getElementById("root"));
+
+    </script>
+    
+</body>
+</html>
